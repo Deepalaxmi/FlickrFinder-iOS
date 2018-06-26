@@ -20,6 +20,7 @@
 		F895B88D20E2094E00D7356A /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B88C20E2094E00D7356A /* SearchListViewModel.swift */; };
 		F895B88F20E20A3500D7356A /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B88E20E20A3500D7356A /* SearchResultViewModel.swift */; };
 		F895B89120E20A4100D7356A /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B89020E20A4100D7356A /* SearchResult.swift */; };
+		F895B89320E20E9600D7356A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B89220E20E9600D7356A /* Photo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		F895B88C20E2094E00D7356A /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		F895B88E20E20A3500D7356A /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		F895B89020E20A4100D7356A /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		F895B89220E20E9600D7356A /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				F895B89020E20A4100D7356A /* SearchResult.swift */,
+				F895B89220E20E9600D7356A /* Photo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F895B89320E20E9600D7356A /* Photo.swift in Sources */,
 				F895B89120E20A4100D7356A /* SearchResult.swift in Sources */,
 				F86F010520E0D444006A4DD8 /* AppCoordinator.swift in Sources */,
 				F895B88B20E2056200D7356A /* UIColor+Theme.swift in Sources */,
