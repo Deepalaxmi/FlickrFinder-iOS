@@ -28,6 +28,10 @@ class SearchCoordinator: Coordinator {
 
     func begin() {
         navigationController.pushViewController(searchListViewController, animated: true)
+        let service = Webservice()
+        service.loadSearchResultsServer(parameters: [:]) { (error, object) in
+            print("[DEBUG]: done ")
+        }
     }
 
 }
