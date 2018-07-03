@@ -9,14 +9,13 @@
 import UIKit
 
 extension UISearchBar {
-
-    func setLightStyle() {
+    func setLightStyleSearchBar() {
         tintColor = .white
         barTintColor = .white
-        setLightTextField()
+        setLightStyleTextField()
     }
 
-    private func setLightTextField() {
+    private func setLightStyleTextField() {
         guard let textField = value(forKey: "searchField") as? UITextField, let backgroundView = textField.subviews.first else { return }
         textField.textColor = UIColor.darkGrayBlue
         backgroundView.backgroundColor = .white

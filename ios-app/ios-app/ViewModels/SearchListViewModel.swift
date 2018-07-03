@@ -10,6 +10,7 @@ import UIKit
 
 class SearchListViewModel {
     fileprivate var webService: Webservice!
+
     var searchResults = [SearchResult]()
 
     init(searchResults: [SearchResult]) {
@@ -19,7 +20,6 @@ class SearchListViewModel {
     init(webService: Webservice) {
         self.webService = webService
     }
-
 }
 
 extension SearchListViewModel {

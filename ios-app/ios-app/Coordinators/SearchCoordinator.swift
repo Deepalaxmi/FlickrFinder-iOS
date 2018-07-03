@@ -23,6 +23,10 @@ class SearchCoordinator: Coordinator {
         self.searchViewController = SearchViewController()
     }
 
+    deinit {
+        print("Deinit \(self)")
+    }
+
     // MARK: - Presenters
 
     func begin() {

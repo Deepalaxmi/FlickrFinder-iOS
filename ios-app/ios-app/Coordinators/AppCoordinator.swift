@@ -21,6 +21,10 @@ class AppCoordinator: Coordinator {
         self.navigationController = navigationController
     }
 
+    deinit {
+        print("Deinit \(self)")
+    }
+
     // MARK: - Presenters
 
     func begin() {
@@ -29,8 +33,8 @@ class AppCoordinator: Coordinator {
 
     func showSearchViewController() {
         let searchCoordinator = SearchCoordinator(with: navigationController)
-        searchCoordinator.begin()
         childCoordinators.append(searchCoordinator)
+        searchCoordinator.begin()
     }
 
 }

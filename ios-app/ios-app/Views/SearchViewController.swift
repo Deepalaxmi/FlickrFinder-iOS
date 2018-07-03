@@ -22,6 +22,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         setupSearchController()
+        setupConstraints()
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "TestCell")
     }
 
@@ -31,8 +32,8 @@ class SearchViewController: UIViewController {
         let placeholderText = NSLocalizedString("Search Flickr", comment: "Search placeholder text")
         navigationController?.navigationBar.prefersLargeTitles = true
         searchController.searchBar.placeholder = placeholderText
-        searchController.searchBar.setLightStyle()
-        
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.setLightStyleSearchBar()
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
@@ -44,9 +45,12 @@ class SearchViewController: UIViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .grayBackground
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
+    }
+
+    func setupConstraints() {
         var constraints: [NSLayoutConstraint] = []
         constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|[collectionView]|", options: [], metrics: nil, views: ["collectionView": collectionView]))
         constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[collectionView]|", options: [], metrics: nil, views: ["collectionView": collectionView]))
