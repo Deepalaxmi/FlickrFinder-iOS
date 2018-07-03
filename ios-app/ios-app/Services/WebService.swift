@@ -51,7 +51,7 @@ final class Webservice {
 
     fileprivate let baseURL = "https://api.flickr.com/services/rest"
 
-    func loadSearchResultsServer(parameters: [String: AnyObject], completion: CompletionObjectHandler = nil) {
+    public func loadSearchResultsServer(parameters: [String: AnyObject], completion: CompletionObjectHandler = nil) {
         var urlComponents = URLComponents(string: baseURL)
         let authQuery = AuthMethod.queryItem(method: .apiKey)
         let apiMethodQuery = APIMethod.queryItem(method: .search)
@@ -81,8 +81,7 @@ final class Webservice {
                         }
                         completion?(nil, nil)
                     } catch {
-                        // Handler Error
-                        completion?(error, nil)
+                        completion?(error, nil) // Handler Error
                     }
                 }
             }

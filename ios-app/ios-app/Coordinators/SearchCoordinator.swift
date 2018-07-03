@@ -13,25 +13,21 @@ class SearchCoordinator: Coordinator {
     // MARK: - Properties
 
     var navigationController: UINavigationController
-    var searchListViewController: SearchListViewController
+    var searchViewController: SearchViewController
     var childCoordinators: [Coordinator] = []
-
 
     // MARK: - Life Cycle
 
     init(with navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.searchListViewController = SearchListViewController()
+        self.searchViewController = SearchViewController()
     }
 
     // MARK: - Presenters
 
     func begin() {
-        navigationController.pushViewController(searchListViewController, animated: true)
-        let service = Webservice()
-        service.loadSearchResultsServer(parameters: [:]) { (error, object) in
-            print("[DEBUG]: done ")
-        }
+        searchViewController.title = NSLocalizedString("Flickr Search", comment: "Search title")
+        navigationController.pushViewController(searchViewController, animated: true)
     }
 
 }
