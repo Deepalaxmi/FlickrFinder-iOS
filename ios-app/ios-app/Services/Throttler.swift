@@ -1,5 +1,5 @@
 //
-//  RequestThrottler.swift
+//  Throttler.swift
 //  ios-app
 //
 //  Created by Vincent Chau on 7/3/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RequestThrottler {
+class Throttler {
     private let backgroundQueue = DispatchQueue.global(qos: .background)
     private var pendingWorkItem: DispatchWorkItem = DispatchWorkItem(block: {})
     private var lastJobDate: Date = Date.distantPast

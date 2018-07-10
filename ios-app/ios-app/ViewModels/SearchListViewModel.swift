@@ -12,8 +12,8 @@ class SearchListViewModel {
     fileprivate var webService: Webservice!
     fileprivate let interval: Int = 1
 
-    fileprivate lazy var throttler: RequestThrottler? = {
-        let requestThrottler = RequestThrottler(seconds: interval)
+    fileprivate lazy var throttler: Throttler? = {
+        let requestThrottler = Throttler(seconds: interval)
         return requestThrottler
     }()
 

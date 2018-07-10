@@ -12,7 +12,7 @@
 		F80E538120EB84B40017C5A2 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80E538020EB84B40017C5A2 /* SearchResultsViewModel.swift */; };
 		F80E538820EB85010017C5A2 /* SearchResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80E538620EB85010017C5A2 /* SearchResultsCell.swift */; };
 		F80E538920EB85010017C5A2 /* SearchResultsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80E538720EB85010017C5A2 /* SearchResultsCell.xib */; };
-		F80E538B20EB85750017C5A2 /* RequestThrottler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80E538A20EB85750017C5A2 /* RequestThrottler.swift */; };
+		F80E538B20EB85750017C5A2 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80E538A20EB85750017C5A2 /* Throttler.swift */; };
 		F81427FD20E0D00A0054890E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81427FC20E0D00A0054890E /* AppDelegate.swift */; };
 		F814280420E0D00B0054890E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F814280320E0D00B0054890E /* Assets.xcassets */; };
 		F814280720E0D00B0054890E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F814280520E0D00B0054890E /* LaunchScreen.storyboard */; };
@@ -34,7 +34,7 @@
 		F80E538020EB84B40017C5A2 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
 		F80E538620EB85010017C5A2 /* SearchResultsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsCell.swift; sourceTree = "<group>"; };
 		F80E538720EB85010017C5A2 /* SearchResultsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultsCell.xib; sourceTree = "<group>"; };
-		F80E538A20EB85750017C5A2 /* RequestThrottler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestThrottler.swift; sourceTree = "<group>"; };
+		F80E538A20EB85750017C5A2 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		F81427F920E0D00A0054890E /* ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F81427FC20E0D00A0054890E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F814280320E0D00B0054890E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				F86F010820E0D50D006A4DD8 /* WebService.swift */,
-				F80E538A20EB85750017C5A2 /* RequestThrottler.swift */,
+				F80E538A20EB85750017C5A2 /* Throttler.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -251,7 +251,7 @@
 			files = (
 				F895B89320E20E9600D7356A /* Photo.swift in Sources */,
 				F80E537820EB74EF0017C5A2 /* UISearchBar+Styles.swift in Sources */,
-				F80E538B20EB85750017C5A2 /* RequestThrottler.swift in Sources */,
+				F80E538B20EB85750017C5A2 /* Throttler.swift in Sources */,
 				F895B89120E20A4100D7356A /* SearchResult.swift in Sources */,
 				F86F010520E0D444006A4DD8 /* AppCoordinator.swift in Sources */,
 				F895B88B20E2056200D7356A /* UIColor+Theme.swift in Sources */,
