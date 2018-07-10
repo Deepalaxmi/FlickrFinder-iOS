@@ -1,4 +1,4 @@
-//
+ //
 //  SearchViewController.swift
 //  ios-app
 //
@@ -12,7 +12,8 @@ class SearchViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var collectionView: UICollectionView!
+    var viewModel: SearchListViewModel!
+    var collectionView: UICollectionView!
 
     let searchController = UISearchController(searchResultsController: nil)
 
@@ -46,6 +47,7 @@ class SearchViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .grayBackground
+        collectionView.contentInset.top = 16.0
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
     }
@@ -60,9 +62,8 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-//        let searchBar = searchController.searchBar
-//        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-//        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+        print("[DEBUG]: \(searchController.searchBar.text)")
+        viewModel.searchTerm = searchController.searchBar.text!
     }
 }
 

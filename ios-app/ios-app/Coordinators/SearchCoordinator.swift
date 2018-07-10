@@ -21,6 +21,7 @@ class SearchCoordinator: Coordinator {
     init(with navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.searchViewController = SearchViewController()
+        self.searchViewController.viewModel = SearchListViewModel(webService: Webservice())
     }
 
     deinit {

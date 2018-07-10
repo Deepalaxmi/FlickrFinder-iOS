@@ -51,11 +51,22 @@ final class Webservice {
 
     fileprivate let baseURL = "https://api.flickr.com/services/rest"
 
-    public func loadSearchResultsServer(parameters: [String: AnyObject], completion: CompletionObjectHandler = nil) {
+    public func loadSearchResultsServer(searchTerm: String, extraParameters: [String: Any]? = nil, currentPage: Int = 0, perPage: Int = 25, completion: CompletionObjectHandler = nil) {
+        let parameters: [String: Any] = [
+            "extras": "media",
+            "format": "json",
+            "nojsoncallback": "true",
+            "text": searchTerm,
+            "per_page": perPage,
+            "page": currentPage
+        ]
         var urlComponents = URLComponents(string: baseURL)
         let authQuery = AuthMethod.queryItem(method: .apiKey)
         let apiMethodQuery = APIMethod.queryItem(method: .search)
-        let parameterQueries = generateParameters(dictionary: parameters)
+        var parameterQueries = generateParameters(dictionary: parameters)
+        if let extraParameters = extraParameters {
+            parameterQueries.append(contentsOf: generateParameters(dictionary: extraParameters))
+        }
         var queryItems = [URLQueryItem]()
         queryItems.append(apiMethodQuery)
         queryItems.append(authQuery)
@@ -69,6 +80,7 @@ final class Webservice {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         urlRequest.httpMethod = HTTPMethod.get.rawValue
+        print("[DEBUG]: urlRequest \(urlRequest)")
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             mainQueue {
                 if let error = error {
@@ -89,7 +101,7 @@ final class Webservice {
         task.resume()
     }
 
-    fileprivate func generateParameters(dictionary: [String: AnyObject]) -> [URLQueryItem] {
+    fileprivate func generateParameters(dictionary: [String: Any]) -> [URLQueryItem] {
         var queryItems = [URLQueryItem]()
         for (key, value) in dictionary {
             if let value = value as? String {
