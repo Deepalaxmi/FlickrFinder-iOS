@@ -9,26 +9,28 @@
 import UIKit
 
 class SearchListViewModel {
-    fileprivate var webService: Webservice!
-    fileprivate let interval: Int = 1
-
-    fileprivate lazy var throttler: Throttler? = {
-        let requestThrottler = Throttler(seconds: interval)
-        return requestThrottler
-    }()
-
+    
     var searchTerm: String = "" {
         didSet {
+            guard searchTerm != "" else { return }
             loadSearchResults(with: searchTerm)
         }
     }
 
     var searchResults = [SearchResult]()
 
+    fileprivate let interval: Int = 1
+    fileprivate var webService: Webservice!
+    fileprivate var currentPage: Int = 0
+
+    fileprivate lazy var throttler: Throttler? = {
+        let requestThrottler = Throttler(seconds: interval)
+        return requestThrottler
+    }()
+
     init(webService: Webservice) {
         self.webService = webService
     }
-
 }
 
 extension SearchListViewModel {

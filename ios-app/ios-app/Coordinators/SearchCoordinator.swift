@@ -21,7 +21,6 @@ class SearchCoordinator: Coordinator {
     init(with navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.searchViewController = SearchViewController()
-        self.searchViewController.viewModel = SearchListViewModel(webService: Webservice())
     }
 
     deinit {
@@ -32,6 +31,7 @@ class SearchCoordinator: Coordinator {
 
     func begin() {
         searchViewController.title = NSLocalizedString("Flickr Search", comment: "Search title")
+        searchViewController.viewModel = SearchListViewModel(webService: Webservice())
         navigationController.pushViewController(searchViewController, animated: true)
     }
 

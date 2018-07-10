@@ -24,7 +24,9 @@ class SearchViewController: UIViewController {
         setupCollectionView()
         setupSearchController()
         setupConstraints()
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "TestCell")
+        collectionView.register(SearchResultsCell.self, forCellWithReuseIdentifier: "SearchResultsCell")
+        collectionView.register(UINib(nibName: "SearchResultsCell", bundle: nil), forCellWithReuseIdentifier: "SearchResultsCell")
+
     }
 
     // MARK: - Setup Views
@@ -47,7 +49,9 @@ class SearchViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .grayBackground
-        collectionView.contentInset.top = 16.0
+        collectionView.contentInset.top = 8.0
+        collectionView.contentInset.left = 8.0
+        collectionView.contentInset.right = 8.0
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
     }
@@ -75,18 +79,17 @@ extension SearchViewController: UICollectionViewDelegate {
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return 30
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let testCell = collectionView.dequeueReusableCell(withReuseIdentifier: "TestCell", for: indexPath)
-        testCell.backgroundColor = .green
+        let testCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultsCell", for: indexPath) as! SearchResultsCell
         return testCell
     }
 }
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 120, height: 120)
     }
 }

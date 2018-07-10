@@ -8,7 +8,8 @@
 
 import Foundation
 
-typealias CompletionObjectHandler = ((Error?, AnyObject?) -> ())?
+internal typealias CompletionObjectHandler = ((Error?, AnyObject?) -> ())?
+internal typealias CompletionAnyHandler = ((Error?, Any?) -> ())?
 
 internal func mainQueue(_ block: @escaping ()->()) {
     DispatchQueue.main.async(execute: block)
@@ -18,6 +19,7 @@ enum WebServiceError: Error {
     case invalidURL
     case invalidResponse
     case failedRequest
+    case parseError
 }
 
 final class Webservice {
@@ -53,52 +55,43 @@ final class Webservice {
 
     public func loadSearchResultsServer(searchTerm: String, extraParameters: [String: Any]? = nil, currentPage: Int = 0, perPage: Int = 25, completion: CompletionObjectHandler = nil) {
         let parameters: [String: Any] = [
-            "extras": "media",
+            "extras": [
+                "media",
+                "url_sq"
+            ],
             "format": "json",
             "nojsoncallback": "true",
             "text": searchTerm,
             "per_page": perPage,
             "page": currentPage
         ]
-        var urlComponents = URLComponents(string: baseURL)
-        let authQuery = AuthMethod.queryItem(method: .apiKey)
-        let apiMethodQuery = APIMethod.queryItem(method: .search)
+
+        var queryItems: [URLQueryItem] = [
+            AuthMethod.queryItem(method: .apiKey),
+            APIMethod.queryItem(method: .search)
+        ]
+
         var parameterQueries = generateParameters(dictionary: parameters)
         if let extraParameters = extraParameters {
             parameterQueries.append(contentsOf: generateParameters(dictionary: extraParameters))
         }
-        var queryItems = [URLQueryItem]()
-        queryItems.append(apiMethodQuery)
-        queryItems.append(authQuery)
         queryItems.append(contentsOf: parameterQueries)
+
+        var urlComponents = URLComponents(string: baseURL)
         urlComponents?.queryItems = queryItems
         guard let url = urlComponents?.url else {
             completion?(WebServiceError.invalidURL, nil)
             return
         }
         var urlRequest = URLRequest(url: url)
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
         urlRequest.httpMethod = HTTPMethod.get.rawValue
-        print("[DEBUG]: urlRequest \(urlRequest)")
-        let task = session.dataTask(with: urlRequest) { (data, response, error) in
-            mainQueue {
-                if let error = error {
-                    completion?(error, nil)
-                } else if let data = data {
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: [])
-                        if let dictionary = json as? [String: Any] {
-                            print("[DEBUG]: dictionary \(dictionary)")
-                        }
-                        completion?(nil, nil)
-                    } catch {
-                        completion?(error, nil) // Handler Error
-                    }
-                }
+        urlRequest.executeRequest { (error, data) in
+            guard let dictionary = data as? [String: Any] else {
+                completion?(WebServiceError.parseError, nil)
+                return
             }
+            print("[DEBUG]: error \(error), collection \(dictionary)")
         }
-        task.resume()
     }
 
     fileprivate func generateParameters(dictionary: [String: Any]) -> [URLQueryItem] {
@@ -107,10 +100,13 @@ final class Webservice {
             if let value = value as? String {
                 let item = URLQueryItem(name: key, value: value)
                 queryItems.append(item)
+            } else if let values = value as? [String] {
+                for value in values {
+                    let item = URLQueryItem(name: key, value: value)
+                    queryItems.append(item)
+                }
             }
         }
         return queryItems
     }
-
 }
-
