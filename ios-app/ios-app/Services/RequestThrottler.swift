@@ -18,7 +18,7 @@ class RequestThrottler {
         self.interval = seconds
     }
 
-    func throttle(block: @escaping ()->()) {
+    func throttle(block: @escaping () -> ()) {
         pendingWorkItem.cancel()
         pendingWorkItem = DispatchWorkItem() { [weak self] in
             self?.lastJobDate = Date()

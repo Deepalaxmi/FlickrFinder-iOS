@@ -10,6 +10,12 @@ import UIKit
 
 class SearchListViewModel {
     fileprivate var webService: Webservice!
+    fileprivate let interval: Int = 1
+
+    fileprivate lazy var throttler: RequestThrottler? = {
+        let requestThrottler = RequestThrottler(seconds: interval)
+        return requestThrottler
+    }()
 
     var searchTerm: String = "" {
         didSet {
@@ -19,10 +25,6 @@ class SearchListViewModel {
 
     var searchResults = [SearchResult]()
 
-    init(searchResults: [SearchResult]) {
-        self.searchResults = searchResults
-    }
-
     init(webService: Webservice) {
         self.webService = webService
     }
@@ -31,12 +33,18 @@ class SearchListViewModel {
 
 extension SearchListViewModel {
     func loadSearchResults(with query: String, completion: CompletionObjectHandler = nil) {
-        webService.loadSearchResultsServer(searchTerm: query, extraParameters: nil) { (error, json) in
-            print("[DEBUG]: error: \(error) json \(json)")
+        guard let throttler = self.throttler else {
+            completion?(nil, nil)
+            return
         }
-    }
-
-    func loadFromServer(completion: CompletionObjectHandler = nil) {
-        // https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=4df09ecd4fb22d6b29e03658dfbca36f&extras=media&format=json&nojsoncallback=1&api_sig=4ab2e34ace5f6084eaed02698ac8e9b5
+        throttler.throttle { [weak self] in
+            guard let self_ = self else {
+                completion?(nil, nil)
+                return
+            }
+           self_.webService.loadSearchResultsServer(searchTerm: query, extraParameters: nil) { (error, json) in
+                print("[DEBUG]: error: \(error) json \(json)")
+            }
+        }
     }
 }
