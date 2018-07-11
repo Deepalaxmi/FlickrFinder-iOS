@@ -21,22 +21,26 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        registerSearchCells()
         setupSearchController()
         setupConstraints()
-        registerSearchCells()
-        bind()
+        setupBindings()
     }
 
     // MARK: - Setup Bindings
 
-    func bind() {
-        viewModel.viewModels.bind { [unowned self] _ in self.collectionView.reloadData() }
+    func setupBindings() {
+        viewModel.needsRefresh.bind { [unowned self] needsRefresh in
+            if needsRefresh {
+                self.collectionView.reloadData()
+            }
+        }
     }
 
     // MARK: - Setup Views
 
     func setupSearchController() {
-        let placeholderText = NSLocalizedString("Search Flickr", comment: "Search placeholder text")
+        let placeholderText = NSLocalizedString("Search Images", comment: "Search placeholder text")
         navigationController?.navigationBar.prefersLargeTitles = true
         searchController.searchBar.placeholder = placeholderText
         searchController.searchResultsUpdater = self
@@ -92,12 +96,13 @@ extension SearchViewController: UICollectionViewDelegate {
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.viewModels.value.count
+        return viewModel.viewModels.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let testCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultsCell", for: indexPath) as! SearchResultsCell
-        return testCell
+        let searchResultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultsCell", for: indexPath) as! SearchResultsCell
+        searchResultCell.viewModel = viewModel.viewModels[indexPath.row]
+        return searchResultCell
     }
 }
 

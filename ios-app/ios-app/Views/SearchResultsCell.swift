@@ -10,15 +10,31 @@ import UIKit
 
 class SearchResultsCell: UICollectionViewCell {
 
+    // MARK: - IBOutlets
+
+    @IBOutlet weak var thumbnailImageView: UIImageView!
+
+    // MARK: - Variables
+
     var viewModel: SearchResultViewModel? {
         didSet {
-            
+            updateContent()
         }
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    // MARK: - View Life Cycle
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailImageView.image = nil
+    }
+
+    // MARK: - Configure Views
+
+    func updateContent() {
+        if let imageURL = viewModel?.imageURL {
+            thumbnailImageView.setImageFromURL(imageURL)
+        }
     }
 
 }

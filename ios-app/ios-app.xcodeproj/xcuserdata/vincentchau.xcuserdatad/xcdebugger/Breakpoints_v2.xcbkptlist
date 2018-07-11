@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-app/ViewModels/SearchListViewModel.swift"
-            timestampString = "552994084.639327"
+            timestampString = "552996906.789641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "loadSearchResults(with:completion:)"
             landmarkType = "7">
          </BreakpointContent>

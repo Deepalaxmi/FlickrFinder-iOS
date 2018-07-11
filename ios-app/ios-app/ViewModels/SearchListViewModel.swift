@@ -12,6 +12,12 @@ class SearchListViewModel {
 
     // MARK: - Variables
 
+    var needsRefresh: Dynamic<Bool> = Dynamic(false) {
+        didSet {
+            needsRefresh.value = false // Reset Flag
+        }
+    }
+
     var searchTerm: String = "" {
         didSet {
             guard searchTerm != "" else { return }
@@ -19,7 +25,11 @@ class SearchListViewModel {
         }
     }
 
-    var viewModels: Dynamic<[SearchResultViewModel]> = Dynamic([])
+    var viewModels = [SearchResultViewModel]() {
+        didSet {
+            needsRefresh.value = true
+        }
+    }
 
     // MARK: - Fileprivate
 
@@ -39,6 +49,7 @@ class SearchListViewModel {
     init(webService: WebService) {
         self.webService = webService
     }
+
 }
 
 extension SearchListViewModel {
@@ -63,7 +74,7 @@ extension SearchListViewModel {
                         let viewModel = SearchResultViewModel(searchResult: searchResult)
                         viewModels.append(viewModel)
                     }
-                    self_.viewModels.value = viewModels
+                    self_.viewModels = viewModels
                 }
             }
         }
