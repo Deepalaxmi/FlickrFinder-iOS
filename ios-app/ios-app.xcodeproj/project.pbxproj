@@ -23,9 +23,10 @@
 		F86F011620E0DCB6006A4DD8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F011520E0DCB6006A4DD8 /* SearchViewController.swift */; };
 		F86F011820E0DD6F006A4DD8 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F011720E0DD6F006A4DD8 /* SearchCoordinator.swift */; };
 		F87FE37920F4B28B00FC657A /* URLRequest+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87FE37820F4B28B00FC657A /* URLRequest+Utilities.swift */; };
+		F87FE37B20F5E5D500FC657A /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87FE37A20F5E5D500FC657A /* SearchResult.swift */; };
 		F895B88B20E2056200D7356A /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B88A20E2056200D7356A /* UIColor+Theme.swift */; };
 		F895B88D20E2094E00D7356A /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B88C20E2094E00D7356A /* SearchListViewModel.swift */; };
-		F895B89120E20A4100D7356A /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B89020E20A4100D7356A /* SearchResult.swift */; };
+		F895B89120E20A4100D7356A /* SearchGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B89020E20A4100D7356A /* SearchGroup.swift */; };
 		F895B89320E20E9600D7356A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B89220E20E9600D7356A /* Photo.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,9 +49,10 @@
 		F86F011520E0DCB6006A4DD8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F86F011720E0DD6F006A4DD8 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		F87FE37820F4B28B00FC657A /* URLRequest+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Utilities.swift"; sourceTree = "<group>"; };
+		F87FE37A20F5E5D500FC657A /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		F895B88A20E2056200D7356A /* UIColor+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
 		F895B88C20E2094E00D7356A /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
-		F895B89020E20A4100D7356A /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		F895B89020E20A4100D7356A /* SearchGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroup.swift; sourceTree = "<group>"; };
 		F895B89220E20E9600D7356A /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,7 +148,8 @@
 		F86F011220E0DC82006A4DD8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F895B89020E20A4100D7356A /* SearchResult.swift */,
+				F895B89020E20A4100D7356A /* SearchGroup.swift */,
+				F87FE37A20F5E5D500FC657A /* SearchResult.swift */,
 				F895B89220E20E9600D7356A /* Photo.swift */,
 			);
 			path = Models;
@@ -255,13 +258,14 @@
 				F895B89320E20E9600D7356A /* Photo.swift in Sources */,
 				F80E537820EB74EF0017C5A2 /* UISearchBar+Styles.swift in Sources */,
 				F80E538B20EB85750017C5A2 /* Throttler.swift in Sources */,
-				F895B89120E20A4100D7356A /* SearchResult.swift in Sources */,
+				F895B89120E20A4100D7356A /* SearchGroup.swift in Sources */,
 				F86F010520E0D444006A4DD8 /* AppCoordinator.swift in Sources */,
 				F895B88B20E2056200D7356A /* UIColor+Theme.swift in Sources */,
 				F86F010C20E0D70D006A4DD8 /* Dynamic.swift in Sources */,
 				F87FE37920F4B28B00FC657A /* URLRequest+Utilities.swift in Sources */,
 				F80E538820EB85010017C5A2 /* SearchResultsCell.swift in Sources */,
 				F86F011620E0DCB6006A4DD8 /* SearchViewController.swift in Sources */,
+				F87FE37B20F5E5D500FC657A /* SearchResult.swift in Sources */,
 				F80E538120EB84B40017C5A2 /* SearchResultsViewModel.swift in Sources */,
 				F86F010320E0D436006A4DD8 /* Coordinator.swift in Sources */,
 				F86F010920E0D50D006A4DD8 /* WebService.swift in Sources */,

@@ -53,7 +53,7 @@ final class Webservice {
 
     fileprivate let baseURL = "https://api.flickr.com/services/rest"
 
-    public func loadSearchResultsServer(searchTerm: String, extraParameters: [String: Any]? = nil, currentPage: Int = 0, perPage: Int = 25, completion: CompletionObjectHandler = nil) {
+    public func loadSearchResultsServer(searchTerm: String, extraParameters: [String: Any]? = nil, currentPage: Int = 1, perPage: Int = 10, completion: CompletionObjectHandler = nil) {
         let parameters: [String: Any] = [
             "extras": [
                 "media",
@@ -62,10 +62,9 @@ final class Webservice {
             "format": "json",
             "nojsoncallback": "true",
             "text": searchTerm,
-            "per_page": perPage,
-            "page": currentPage
+            "per_page": String(perPage),
+            "page": String(currentPage)
         ]
-
         var queryItems: [URLQueryItem] = [
             AuthMethod.queryItem(method: .apiKey),
             APIMethod.queryItem(method: .search)
@@ -90,7 +89,8 @@ final class Webservice {
                 completion?(WebServiceError.parseError, nil)
                 return
             }
-            print("[DEBUG]: error \(error), collection \(dictionary)")
+            let searchGroup = SearchGroup(with: dictionary)
+            completion?(nil, searchGroup)
         }
     }
 

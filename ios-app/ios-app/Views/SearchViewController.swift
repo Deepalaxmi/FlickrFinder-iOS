@@ -26,7 +26,6 @@ class SearchViewController: UIViewController {
         setupConstraints()
         collectionView.register(SearchResultsCell.self, forCellWithReuseIdentifier: "SearchResultsCell")
         collectionView.register(UINib(nibName: "SearchResultsCell", bundle: nil), forCellWithReuseIdentifier: "SearchResultsCell")
-
     }
 
     // MARK: - Setup Views

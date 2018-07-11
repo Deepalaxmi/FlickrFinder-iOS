@@ -9,7 +9,6 @@
 import UIKit
 
 class SearchListViewModel {
-    
     var searchTerm: String = "" {
         didSet {
             guard searchTerm != "" else { return }
@@ -17,11 +16,9 @@ class SearchListViewModel {
         }
     }
 
-    var searchResults = [SearchResult]()
-
-    fileprivate let interval: Int = 1
+    fileprivate let interval: Int = 2
     fileprivate var webService: Webservice!
-    fileprivate var currentPage: Int = 0
+    fileprivate var currentPage: Int = 1
 
     fileprivate lazy var throttler: Throttler? = {
         let requestThrottler = Throttler(seconds: interval)
@@ -44,8 +41,10 @@ extension SearchListViewModel {
                 completion?(nil, nil)
                 return
             }
-           self_.webService.loadSearchResultsServer(searchTerm: query, extraParameters: nil) { (error, json) in
-                print("[DEBUG]: error: \(error) json \(json)")
+            self_.webService.loadSearchResultsServer(searchTerm: query, extraParameters: nil) { (error, searchResult) in
+                if let searchResult = searchResult as? SearchResult {
+                    
+                }
             }
         }
     }

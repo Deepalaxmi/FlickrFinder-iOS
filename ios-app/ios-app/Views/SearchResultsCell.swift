@@ -10,6 +10,12 @@ import UIKit
 
 class SearchResultsCell: UICollectionViewCell {
 
+    var viewModel: SearchResultViewModel? {
+        didSet {
+            
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

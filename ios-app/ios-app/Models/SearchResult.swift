@@ -2,14 +2,15 @@
 //  SearchResult.swift
 //  ios-app
 //
-//  Created by Vincent Chau on 6/25/18.
+//  Created by Vincent Chau on 7/11/18.
 //  Copyright © 2018 Vincent Chau. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class SearchResult {
-    var currentPage: Int = 0
-    var perPage: Int = 0
-    var photo: Photo? = nil
+protocol SearchResult {
+    var id: String? { get set }
+    var title: String? { get set }
+    var thumbnailURL: URL? { get set }
 }
+
