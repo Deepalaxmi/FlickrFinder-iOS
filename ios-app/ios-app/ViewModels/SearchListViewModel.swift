@@ -33,9 +33,10 @@ class SearchListViewModel {
 
     // MARK: - Fileprivate
 
-    fileprivate let interval: Int = 2
+    fileprivate let interval: Int = 1
     fileprivate var webService: WebService!
     fileprivate var currentPage: Int = 1
+    fileprivate var canLoadMore: Bool = true
 
     // MARK: - Lazy Inits
 
@@ -48,6 +49,12 @@ class SearchListViewModel {
 
     init(webService: WebService) {
         self.webService = webService
+    }
+
+    // MARK: - Helper Methods
+
+    func loadMoreResults() {
+
     }
 
 }
@@ -75,6 +82,8 @@ extension SearchListViewModel {
                         viewModels.append(viewModel)
                     }
                     self_.viewModels = viewModels
+                } else {
+                    self_.canLoadMore = false // Loaded last page
                 }
             }
         }

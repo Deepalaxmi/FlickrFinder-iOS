@@ -17,6 +17,7 @@
 		F814280420E0D00B0054890E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F814280320E0D00B0054890E /* Assets.xcassets */; };
 		F814280720E0D00B0054890E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F814280520E0D00B0054890E /* LaunchScreen.storyboard */; };
 		F82E83F420F60E0A0034AC5B /* UIImageView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82E83F320F60E0A0034AC5B /* UIImageView+Utilities.swift */; };
+		F82E83F620F6112F0034AC5B /* AppImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82E83F520F6112F0034AC5B /* AppImage.swift */; };
 		F86F010320E0D436006A4DD8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F010220E0D436006A4DD8 /* Coordinator.swift */; };
 		F86F010520E0D444006A4DD8 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F010420E0D444006A4DD8 /* AppCoordinator.swift */; };
 		F86F010920E0D50D006A4DD8 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F010820E0D50D006A4DD8 /* WebService.swift */; };
@@ -44,6 +45,7 @@
 		F814280620E0D00B0054890E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F814280820E0D00B0054890E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F82E83F320F60E0A0034AC5B /* UIImageView+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utilities.swift"; sourceTree = "<group>"; };
+		F82E83F520F6112F0034AC5B /* AppImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImage.swift; sourceTree = "<group>"; };
 		F86F010220E0D436006A4DD8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		F86F010420E0D444006A4DD8 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		F86F010820E0D50D006A4DD8 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			children = (
 				F895B88A20E2056200D7356A /* UIColor+Theme.swift */,
 				F80E537520EB70010017C5A2 /* AppFonts.swift */,
+				F82E83F520F6112F0034AC5B /* AppImage.swift */,
 				F80E537720EB74EF0017C5A2 /* UISearchBar+Styles.swift */,
 				F82E83F320F60E0A0034AC5B /* UIImageView+Utilities.swift */,
 			);
@@ -267,6 +270,7 @@
 				F86F010C20E0D70D006A4DD8 /* Dynamic.swift in Sources */,
 				F87FE37920F4B28B00FC657A /* URLRequest+Utilities.swift in Sources */,
 				F82E83F420F60E0A0034AC5B /* UIImageView+Utilities.swift in Sources */,
+				F82E83F620F6112F0034AC5B /* AppImage.swift in Sources */,
 				F80E538820EB85010017C5A2 /* SearchResultsCell.swift in Sources */,
 				F86F011620E0DCB6006A4DD8 /* SearchViewController.swift in Sources */,
 				F87FE37B20F5E5D500FC657A /* SearchResult.swift in Sources */,

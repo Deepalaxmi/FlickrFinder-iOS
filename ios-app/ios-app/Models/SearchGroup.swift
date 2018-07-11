@@ -19,6 +19,7 @@ import Foundation
 class SearchGroup {
     var searchResults: [SearchResult]?
     init(with dictionary: [String: Any]) {
+        print("[DEBUG]: dictionary \(dictionary)")
         if let photosDictionary = dictionary["photos"] as? [String: Any], let photosDictionaryArray = photosDictionary["photo"] as? [[String: Any]] {
             var photos = [Photo]()
             for dictionary in photosDictionaryArray {

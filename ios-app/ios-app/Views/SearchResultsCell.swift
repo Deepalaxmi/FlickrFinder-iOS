@@ -33,7 +33,7 @@ class SearchResultsCell: UICollectionViewCell {
 
     func updateContent() {
         if let imageURL = viewModel?.imageURL {
-            thumbnailImageView.setImageFromURL(imageURL)
+            thumbnailImageView.setImageFromURL(imageURL, placeholderImage: AppImage.Placeholder250)
         }
     }
 
