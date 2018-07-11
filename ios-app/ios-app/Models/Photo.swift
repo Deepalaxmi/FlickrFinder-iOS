@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vincent Chau. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 extension Photo: SearchResult {}
 
@@ -26,9 +26,8 @@ class Photo {
         if let title = dictionary["title"] as? String {
             self.title = title
         }
-        if let thumbnailURLString = dictionary["img_sq"] as? String, let thumbnailURL = URL(string: thumbnailURLString) {
+        if let thumbnailURLString = dictionary["url_sq"] as? String, let thumbnailURL = URL(string: thumbnailURLString) {
             self.thumbnailURL = thumbnailURL
         }
     }
-
 }

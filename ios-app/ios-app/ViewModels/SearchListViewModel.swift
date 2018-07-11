@@ -9,6 +9,9 @@
 import UIKit
 
 class SearchListViewModel {
+
+    // MARK: - Variables
+
     var searchTerm: String = "" {
         didSet {
             guard searchTerm != "" else { return }
@@ -16,34 +19,51 @@ class SearchListViewModel {
         }
     }
 
+    var viewModels: Dynamic<[SearchResultViewModel]> = Dynamic([])
+
+    // MARK: - Fileprivate
+
     fileprivate let interval: Int = 2
-    fileprivate var webService: Webservice!
+    fileprivate var webService: WebService!
     fileprivate var currentPage: Int = 1
 
-    fileprivate lazy var throttler: Throttler? = {
+    // MARK: - Lazy Inits
+
+    fileprivate lazy var throttler: Throttler = {
         let requestThrottler = Throttler(seconds: interval)
         return requestThrottler
     }()
 
-    init(webService: Webservice) {
+    // MARK: - Life Cycle
+
+    init(webService: WebService) {
         self.webService = webService
     }
 }
 
 extension SearchListViewModel {
-    func loadSearchResults(with query: String, completion: CompletionObjectHandler = nil) {
-        guard let throttler = self.throttler else {
-            completion?(nil, nil)
-            return
-        }
+
+    // MARK: - Networking
+
+    /**
+     This method loads the search results and populate the child view models. The requests are throttled to prevent excess requests.
+
+     - parameter query: the search term
+     - parameter completion: returns a closure with error and 
+     */
+    func loadSearchResults(with query: String, completion: (() -> Void)? = nil) {
         throttler.throttle { [weak self] in
             guard let self_ = self else {
-                completion?(nil, nil)
                 return
             }
-            self_.webService.loadSearchResultsServer(searchTerm: query, extraParameters: nil) { (error, searchResult) in
-                if let searchResult = searchResult as? SearchResult {
-                    
+            self_.webService.loadSearchResultsServer(searchTerm: query) { (error, searchGroup) in
+                if let searchGroup = searchGroup as? SearchGroup, let searchResults = searchGroup.searchResults {
+                    var viewModels = [SearchResultViewModel]()
+                    for searchResult in searchResults {
+                        let viewModel = SearchResultViewModel(searchResult: searchResult)
+                        viewModels.append(viewModel)
+                    }
+                    self_.viewModels.value = viewModels
                 }
             }
         }

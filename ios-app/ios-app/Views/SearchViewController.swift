@@ -10,11 +10,10 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
-    // MARK: - Properties
+    // MARK: - Variables
 
     var viewModel: SearchListViewModel!
     var collectionView: UICollectionView!
-
     let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - View Life Cycle
@@ -24,8 +23,14 @@ class SearchViewController: UIViewController {
         setupCollectionView()
         setupSearchController()
         setupConstraints()
-        collectionView.register(SearchResultsCell.self, forCellWithReuseIdentifier: "SearchResultsCell")
-        collectionView.register(UINib(nibName: "SearchResultsCell", bundle: nil), forCellWithReuseIdentifier: "SearchResultsCell")
+        registerSearchCells()
+        bind()
+    }
+
+    // MARK: - Setup Bindings
+
+    func bind() {
+        viewModel.viewModels.bind { [unowned self] _ in self.collectionView.reloadData() }
     }
 
     // MARK: - Setup Views
@@ -55,6 +60,11 @@ class SearchViewController: UIViewController {
         view.addSubview(collectionView)
     }
 
+    func registerSearchCells() {
+        collectionView.register(SearchResultsCell.self, forCellWithReuseIdentifier: "SearchResultsCell")
+        collectionView.register(UINib(nibName: "SearchResultsCell", bundle: nil), forCellWithReuseIdentifier: "SearchResultsCell")
+    }
+
     func setupConstraints() {
         var constraints: [NSLayoutConstraint] = []
         constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|[collectionView]|", options: [], metrics: nil, views: ["collectionView": collectionView]))
@@ -63,12 +73,16 @@ class SearchViewController: UIViewController {
     }
 }
 
+// MARK: - UISearchResultsUpdating
+
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print("[DEBUG]: \(searchController.searchBar.text)")
-        viewModel.searchTerm = searchController.searchBar.text!
+        guard let searchTerm = searchController.searchBar.text else { return }
+        viewModel.searchTerm = searchTerm
     }
 }
+
+// MARK: - UICollectionViewDelegate & UICollectionViewDataSource
 
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -78,7 +92,7 @@ extension SearchViewController: UICollectionViewDelegate {
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return viewModel.viewModels.value.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

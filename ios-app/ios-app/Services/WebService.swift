@@ -22,7 +22,13 @@ enum WebServiceError: Error {
     case parseError
 }
 
-final class Webservice {
+final class WebService {
+
+    // MARK: - Constants
+
+    fileprivate let baseURL = "https://api.flickr.com/services/rest"
+
+    // MARK: - Enumerations
 
     fileprivate enum APIMethod: String {
         case search = "flickr.photos.search"
@@ -51,7 +57,7 @@ final class Webservice {
         case delete = "DELETE"
     }
 
-    fileprivate let baseURL = "https://api.flickr.com/services/rest"
+    // MARK: - Load Methods
 
     public func loadSearchResultsServer(searchTerm: String, extraParameters: [String: Any]? = nil, currentPage: Int = 1, perPage: Int = 10, completion: CompletionObjectHandler = nil) {
         let parameters: [String: Any] = [
@@ -85,14 +91,18 @@ final class Webservice {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = HTTPMethod.get.rawValue
         urlRequest.executeRequest { (error, data) in
-            guard let dictionary = data as? [String: Any] else {
-                completion?(WebServiceError.parseError, nil)
-                return
+            if let error = error {
+                completion?(error, nil)
+            } else if let dictionary = data as? [String: Any] {
+                let searchGroup = SearchGroup(with: dictionary)
+                completion?(nil, searchGroup)
+            } else {
+                completion?(WebServiceError.invalidResponse, nil)
             }
-            let searchGroup = SearchGroup(with: dictionary)
-            completion?(nil, searchGroup)
         }
     }
+
+    // MARK: - Helper Methods
 
     fileprivate func generateParameters(dictionary: [String: Any]) -> [URLQueryItem] {
         var queryItems = [URLQueryItem]()

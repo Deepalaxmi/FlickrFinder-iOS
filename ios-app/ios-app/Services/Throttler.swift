@@ -9,14 +9,21 @@
 import UIKit
 
 class Throttler {
-    private let backgroundQueue = DispatchQueue.global(qos: .background)
-    private var pendingWorkItem: DispatchWorkItem = DispatchWorkItem(block: {})
-    private var lastJobDate: Date = Date.distantPast
-    private var interval: Int
+
+    // MARK: - Variables
+
+    fileprivate let backgroundQueue = DispatchQueue.global(qos: .background)
+    fileprivate var pendingWorkItem: DispatchWorkItem = DispatchWorkItem(block: {})
+    fileprivate var lastJobDate: Date = Date.distantPast
+    fileprivate var interval: Int
+
+    // MARK: - Life Cycle
 
     init(seconds: Int) {
         self.interval = seconds
     }
+
+    // MARK: - Methods
 
     func throttle(block: @escaping () -> ()) {
         pendingWorkItem.cancel()

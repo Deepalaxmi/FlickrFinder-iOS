@@ -31,7 +31,8 @@ class SearchCoordinator: Coordinator {
 
     func begin() {
         searchViewController.title = NSLocalizedString("Flickr Search", comment: "Search title")
-        searchViewController.viewModel = SearchListViewModel(webService: Webservice())
+        let viewModel = SearchListViewModel(webService: WebService())
+        searchViewController.viewModel = viewModel
         navigationController.pushViewController(searchViewController, animated: true)
     }
 

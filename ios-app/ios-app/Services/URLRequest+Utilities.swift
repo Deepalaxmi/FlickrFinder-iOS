@@ -24,7 +24,7 @@ extension URLRequest {
                         } else if let responseDictionaryArray = json as? [[String: Any]] {
                             completion?(nil, responseDictionaryArray)
                         } else {
-                            completion?(WebServiceError.invalidResponse, nil)
+                            completion?(WebServiceError.parseError, nil)
                         }
                     } catch {
                         completion?(error, nil) // Handler Error
