@@ -56,7 +56,7 @@ class SearchViewController: UIViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .grayBackground
+        collectionView.backgroundColor = .white
         collectionView.contentInset.top = 8.0
         collectionView.contentInset.left = 8.0
         collectionView.contentInset.right = 8.0
@@ -77,7 +77,7 @@ class SearchViewController: UIViewController {
     }
 }
 
-// MARK: - UISearchResultsUpdating
+ // MARK: - UISearchResultsUpdating
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {

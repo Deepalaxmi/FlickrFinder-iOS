@@ -6,9 +6,9 @@
 //  Copyright © 2018 Vincent Chau. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class SearchResultViewModel {
+struct SearchResultViewModel {
 
     // MARK: - Variables
 
@@ -21,4 +21,16 @@ class SearchResultViewModel {
         self.title = searchResult.title
         self.imageURL = searchResult.thumbnailURL
     }
+
+    func fetchCachedImage() -> UIImage? {
+        guard let cacheKey = imageURL?.absoluteString else { return nil }
+        guard let cachedImage = SearchListViewModel.imageCache.object(forKey: NSString(string: cacheKey)) as? UIImage else { return nil }
+        return cachedImage
+    }
+
+    func storeImageToCache(image: UIImage) {
+        guard let cacheKey = imageURL?.absoluteString else { return }
+        SearchListViewModel.imageCache.setObject(image, forKey: NSString(string: cacheKey))
+    }
+
 }

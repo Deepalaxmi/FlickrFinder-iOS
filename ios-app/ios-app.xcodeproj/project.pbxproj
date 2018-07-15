@@ -26,10 +26,11 @@
 		F86F011820E0DD6F006A4DD8 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F011720E0DD6F006A4DD8 /* SearchCoordinator.swift */; };
 		F87FE37920F4B28B00FC657A /* URLRequest+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87FE37820F4B28B00FC657A /* URLRequest+Utilities.swift */; };
 		F87FE37B20F5E5D500FC657A /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87FE37A20F5E5D500FC657A /* SearchResult.swift */; };
-		F895B88B20E2056200D7356A /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B88A20E2056200D7356A /* UIColor+Theme.swift */; };
+		F895B88B20E2056200D7356A /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B88A20E2056200D7356A /* AppColors.swift */; };
 		F895B88D20E2094E00D7356A /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B88C20E2094E00D7356A /* SearchListViewModel.swift */; };
 		F895B89120E20A4100D7356A /* SearchGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B89020E20A4100D7356A /* SearchGroup.swift */; };
 		F895B89320E20E9600D7356A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B89220E20E9600D7356A /* Photo.swift */; };
+		F8F1889C20FB1ECB00B81A11 /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F1889B20FB1ECB00B81A11 /* UIViewController+Alerts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,10 +55,11 @@
 		F86F011720E0DD6F006A4DD8 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		F87FE37820F4B28B00FC657A /* URLRequest+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Utilities.swift"; sourceTree = "<group>"; };
 		F87FE37A20F5E5D500FC657A /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
-		F895B88A20E2056200D7356A /* UIColor+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
+		F895B88A20E2056200D7356A /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		F895B88C20E2094E00D7356A /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		F895B89020E20A4100D7356A /* SearchGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroup.swift; sourceTree = "<group>"; };
 		F895B89220E20E9600D7356A /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		F8F1889B20FB1ECB00B81A11 /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,9 @@
 			isa = PBXGroup;
 			children = (
 				F81427FC20E0D00A0054890E /* AppDelegate.swift */,
+				F895B88A20E2056200D7356A /* AppColors.swift */,
+				F82E83F520F6112F0034AC5B /* AppImage.swift */,
+				F80E537520EB70010017C5A2 /* AppFonts.swift */,
 			);
 			path = "App Global";
 			sourceTree = "<group>";
@@ -181,11 +186,9 @@
 		F895B88920E2054400D7356A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				F895B88A20E2056200D7356A /* UIColor+Theme.swift */,
-				F80E537520EB70010017C5A2 /* AppFonts.swift */,
-				F82E83F520F6112F0034AC5B /* AppImage.swift */,
 				F80E537720EB74EF0017C5A2 /* UISearchBar+Styles.swift */,
 				F82E83F320F60E0A0034AC5B /* UIImageView+Utilities.swift */,
+				F8F1889B20FB1ECB00B81A11 /* UIViewController+Alerts.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -266,7 +269,7 @@
 				F80E538B20EB85750017C5A2 /* Throttler.swift in Sources */,
 				F895B89120E20A4100D7356A /* SearchGroup.swift in Sources */,
 				F86F010520E0D444006A4DD8 /* AppCoordinator.swift in Sources */,
-				F895B88B20E2056200D7356A /* UIColor+Theme.swift in Sources */,
+				F895B88B20E2056200D7356A /* AppColors.swift in Sources */,
 				F86F010C20E0D70D006A4DD8 /* Dynamic.swift in Sources */,
 				F87FE37920F4B28B00FC657A /* URLRequest+Utilities.swift in Sources */,
 				F82E83F420F60E0A0034AC5B /* UIImageView+Utilities.swift in Sources */,
@@ -280,6 +283,7 @@
 				F80E537620EB70010017C5A2 /* AppFonts.swift in Sources */,
 				F895B88D20E2094E00D7356A /* SearchListViewModel.swift in Sources */,
 				F81427FD20E0D00A0054890E /* AppDelegate.swift in Sources */,
+				F8F1889C20FB1ECB00B81A11 /* UIViewController+Alerts.swift in Sources */,
 				F86F011820E0DD6F006A4DD8 /* SearchCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

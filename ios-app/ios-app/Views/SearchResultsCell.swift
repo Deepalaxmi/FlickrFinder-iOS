@@ -32,8 +32,14 @@ class SearchResultsCell: UICollectionViewCell {
     // MARK: - Configure Views
 
     func updateContent() {
-        if let imageURL = viewModel?.imageURL {
-            thumbnailImageView.setImageFromURL(imageURL, placeholderImage: AppImage.Placeholder250)
+        guard let viewModel = viewModel, let imageURL = viewModel.imageURL else { return }
+        if let cachedImage = viewModel.fetchCachedImage() {
+            thumbnailImageView.image = cachedImage
+        } else {
+            thumbnailImageView.setImageFromURL(imageURL, defaultImage: AppImage.Placeholder250) { [weak self] image in
+                guard let self_ = self, let image = image else { return }
+                self_.viewModel?.storeImageToCache(image: image)
+            }
         }
     }
 

@@ -15,6 +15,10 @@ internal func mainQueue(_ block: @escaping ()->()) {
     DispatchQueue.main.async(execute: block)
 }
 
+internal func backgroundQueue(_ block: @escaping ()->()) {
+    DispatchQueue.global(qos: .background).async(execute: block)
+}
+
 enum WebServiceError: Error {
     case invalidURL
     case invalidResponse
@@ -59,7 +63,7 @@ final class WebService {
 
     // MARK: - Load Methods
 
-    public func loadSearchResultsServer(searchTerm: String, extraParameters: [String: Any]? = nil, currentPage: Int = 1, perPage: Int = 10, completion: CompletionObjectHandler = nil) {
+    public func loadSearchResultsServer(searchTerm: String, extraParameters: [String: Any]? = nil, currentPage: Int = 1, perPage: Int = 25, completion: CompletionObjectHandler = nil) {
         let parameters: [String: Any] = [
             "extras": [
                 "media",

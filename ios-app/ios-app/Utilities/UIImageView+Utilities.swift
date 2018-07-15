@@ -8,14 +8,19 @@
 
 import UIKit
 
+typealias ImageCompletionHandler = ((UIImage?) -> Void)?
+
 extension UIImageView {
-    func setImageFromURL(_ url: URL, placeholderImage: UIImage? = nil) {
-        DispatchQueue.global(qos: .default).async { [weak self] in
+    func setImageFromURL(_ url: URL, defaultImage: UIImage? = nil, completion: ImageCompletionHandler = nil) {
+        backgroundQueue { [weak self] in
             guard let self_ = self else { return }
-            if let imageData = try? Data(contentsOf: url), let imageFromData = UIImage(data: imageData) {
-                mainQueue { self_.image = imageFromData }
+            if let imageData = try? Data(contentsOf: url) {
+                mainQueue {
+                    self_.image = UIImage(data: imageData) ?? defaultImage
+                    completion?(self_.image)
+                }
             } else {
-                mainQueue { self_.image = placeholderImage }
+                mainQueue { completion?(nil) }
             }
         }
     }

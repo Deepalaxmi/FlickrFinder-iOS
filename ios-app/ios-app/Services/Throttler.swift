@@ -15,11 +15,11 @@ class Throttler {
     fileprivate let backgroundQueue = DispatchQueue.global(qos: .background)
     fileprivate var pendingWorkItem: DispatchWorkItem = DispatchWorkItem(block: {})
     fileprivate var lastJobDate: Date = Date.distantPast
-    fileprivate var interval: Int
+    fileprivate var interval: Double
 
     // MARK: - Life Cycle
 
-    init(seconds: Int) {
+    init(seconds: Double) {
         self.interval = seconds
     }
 
@@ -31,7 +31,7 @@ class Throttler {
             self?.lastJobDate = Date()
             block()
         }
-        let delay = Int(Date().timeIntervalSince(lastJobDate).rounded()) > interval ? 0 : interval
-        backgroundQueue.asyncAfter(deadline: .now() + Double(delay), execute: pendingWorkItem)
+        let delay = Double(Date().timeIntervalSince(lastJobDate).rounded()) > interval ? 0 : interval
+        backgroundQueue.asyncAfter(deadline: .now() + delay, execute: pendingWorkItem)
     }
 }
