@@ -28,13 +28,13 @@ class AppCoordinator: Coordinator {
     // MARK: - Presenters
 
     func begin() {
-        showSearchViewController() // Show first view
+        showHomeViewController() // Show first view
     }
 
-    func showSearchViewController() {
-        let searchCoordinator = SearchCoordinator(with: navigationController)
-        childCoordinators.append(searchCoordinator)
-        searchCoordinator.begin()
-    }
+    func showHomeViewController() {
+		let homeViewController = HomeViewController()
+		homeViewController.title = NSLocalizedString("Home", comment: "Search title")
+		navigationController.pushViewController(homeViewController, animated: true)
+	}
 
 }

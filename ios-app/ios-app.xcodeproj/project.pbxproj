@@ -22,8 +22,7 @@
 		F86F010520E0D444006A4DD8 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F010420E0D444006A4DD8 /* AppCoordinator.swift */; };
 		F86F010920E0D50D006A4DD8 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F010820E0D50D006A4DD8 /* WebService.swift */; };
 		F86F010C20E0D70D006A4DD8 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F010B20E0D70D006A4DD8 /* Dynamic.swift */; };
-		F86F011620E0DCB6006A4DD8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F011520E0DCB6006A4DD8 /* SearchViewController.swift */; };
-		F86F011820E0DD6F006A4DD8 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F011720E0DD6F006A4DD8 /* SearchCoordinator.swift */; };
+		F86F011620E0DCB6006A4DD8 /* SearchableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86F011520E0DCB6006A4DD8 /* SearchableViewController.swift */; };
 		F87FE37920F4B28B00FC657A /* URLRequest+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87FE37820F4B28B00FC657A /* URLRequest+Utilities.swift */; };
 		F87FE37B20F5E5D500FC657A /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87FE37A20F5E5D500FC657A /* SearchResult.swift */; };
 		F895B88B20E2056200D7356A /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B88A20E2056200D7356A /* AppColors.swift */; };
@@ -31,6 +30,8 @@
 		F895B89120E20A4100D7356A /* SearchGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B89020E20A4100D7356A /* SearchGroup.swift */; };
 		F895B89320E20E9600D7356A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895B89220E20E9600D7356A /* Photo.swift */; };
 		F8F1889C20FB1ECB00B81A11 /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F1889B20FB1ECB00B81A11 /* UIViewController+Alerts.swift */; };
+		F8F1889E20FB3A3F00B81A11 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F1889D20FB3A3F00B81A11 /* SearchResultsViewController.swift */; };
+		F8F188A320FB4B5800B81A11 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F188A220FB4B5800B81A11 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,8 +52,7 @@
 		F86F010420E0D444006A4DD8 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		F86F010820E0D50D006A4DD8 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		F86F010B20E0D70D006A4DD8 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
-		F86F011520E0DCB6006A4DD8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		F86F011720E0DD6F006A4DD8 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
+		F86F011520E0DCB6006A4DD8 /* SearchableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableViewController.swift; sourceTree = "<group>"; };
 		F87FE37820F4B28B00FC657A /* URLRequest+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Utilities.swift"; sourceTree = "<group>"; };
 		F87FE37A20F5E5D500FC657A /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		F895B88A20E2056200D7356A /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
@@ -60,6 +60,8 @@
 		F895B89020E20A4100D7356A /* SearchGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroup.swift; sourceTree = "<group>"; };
 		F895B89220E20E9600D7356A /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		F8F1889B20FB1ECB00B81A11 /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
+		F8F1889D20FB3A3F00B81A11 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		F8F188A220FB4B5800B81A11 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +133,6 @@
 			children = (
 				F86F010220E0D436006A4DD8 /* Coordinator.swift */,
 				F86F010420E0D444006A4DD8 /* AppCoordinator.swift */,
-				F86F011720E0DD6F006A4DD8 /* SearchCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -176,9 +177,8 @@
 		F86F011420E0DCA2006A4DD8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F86F011520E0DCB6006A4DD8 /* SearchViewController.swift */,
-				F80E538620EB85010017C5A2 /* SearchResultsCell.swift */,
-				F80E538720EB85010017C5A2 /* SearchResultsCell.xib */,
+				F8F188A420FB4B6200B81A11 /* Home */,
+				F8F188A120FB491C00B81A11 /* Search */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,6 +191,25 @@
 				F8F1889B20FB1ECB00B81A11 /* UIViewController+Alerts.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F8F188A120FB491C00B81A11 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				F86F011520E0DCB6006A4DD8 /* SearchableViewController.swift */,
+				F8F1889D20FB3A3F00B81A11 /* SearchResultsViewController.swift */,
+				F80E538620EB85010017C5A2 /* SearchResultsCell.swift */,
+				F80E538720EB85010017C5A2 /* SearchResultsCell.xib */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		F8F188A420FB4B6200B81A11 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F8F188A220FB4B5800B81A11 /* HomeViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,15 +286,17 @@
 				F895B89320E20E9600D7356A /* Photo.swift in Sources */,
 				F80E537820EB74EF0017C5A2 /* UISearchBar+Styles.swift in Sources */,
 				F80E538B20EB85750017C5A2 /* Throttler.swift in Sources */,
+				F8F1889E20FB3A3F00B81A11 /* SearchResultsViewController.swift in Sources */,
 				F895B89120E20A4100D7356A /* SearchGroup.swift in Sources */,
 				F86F010520E0D444006A4DD8 /* AppCoordinator.swift in Sources */,
+				F8F188A320FB4B5800B81A11 /* HomeViewController.swift in Sources */,
 				F895B88B20E2056200D7356A /* AppColors.swift in Sources */,
 				F86F010C20E0D70D006A4DD8 /* Dynamic.swift in Sources */,
 				F87FE37920F4B28B00FC657A /* URLRequest+Utilities.swift in Sources */,
 				F82E83F420F60E0A0034AC5B /* UIImageView+Utilities.swift in Sources */,
 				F82E83F620F6112F0034AC5B /* AppImage.swift in Sources */,
 				F80E538820EB85010017C5A2 /* SearchResultsCell.swift in Sources */,
-				F86F011620E0DCB6006A4DD8 /* SearchViewController.swift in Sources */,
+				F86F011620E0DCB6006A4DD8 /* SearchableViewController.swift in Sources */,
 				F87FE37B20F5E5D500FC657A /* SearchResult.swift in Sources */,
 				F80E538120EB84B40017C5A2 /* SearchResultsViewModel.swift in Sources */,
 				F86F010320E0D436006A4DD8 /* Coordinator.swift in Sources */,
@@ -284,7 +305,6 @@
 				F895B88D20E2094E00D7356A /* SearchListViewModel.swift in Sources */,
 				F81427FD20E0D00A0054890E /* AppDelegate.swift in Sources */,
 				F8F1889C20FB1ECB00B81A11 /* UIViewController+Alerts.swift in Sources */,
-				F86F011820E0DD6F006A4DD8 /* SearchCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
