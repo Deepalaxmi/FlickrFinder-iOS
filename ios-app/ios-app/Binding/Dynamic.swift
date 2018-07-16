@@ -8,11 +8,11 @@
 
 import Foundation
 /**
- ## Dynamic<T>
+## Dynamic<T>
 
- This class is a lightweight single binding for this MVVM implementation.
+This class is a lightweight single binding for this MVVM implementation, which can be expanded in the future if need be.
 
- */
+*/
 class Dynamic<T> {
 
     typealias Listener = (T) -> Void

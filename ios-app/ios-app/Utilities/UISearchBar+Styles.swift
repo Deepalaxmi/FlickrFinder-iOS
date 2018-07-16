@@ -9,7 +9,7 @@
 import UIKit
 
 extension UISearchBar {
-    func setLightStyleSearchBar() {
+    func updateToLightStyleSearchBar() {
         tintColor = .white
         barTintColor = .white
         setLightStyleTextField()

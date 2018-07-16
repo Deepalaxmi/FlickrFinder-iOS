@@ -37,4 +37,19 @@ class AppCoordinator: Coordinator {
 		navigationController.pushViewController(homeViewController, animated: true)
 	}
 
+	func showDetailViewController(viewModel: SearchResultViewModel) {
+		let detailViewController = SearchDetailViewController()
+		detailViewController.viewModel = viewModel
+		detailViewController.title = NSLocalizedString("Detail", comment: "Search title")
+		navigationController.pushViewController(detailViewController, animated: true)
+	}
+
+}
+
+// MARK: - UIViewController + AppCoordinator
+
+extension UIViewController {
+	weak var appCoordinator: AppCoordinator? {
+		return (UIApplication.shared.delegate as? AppDelegate)?.appCoordinator
+	}
 }

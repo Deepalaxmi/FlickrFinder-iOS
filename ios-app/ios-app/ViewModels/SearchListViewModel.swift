@@ -24,16 +24,19 @@ class SearchListViewModel {
 
     var loadError: Dynamic<Error?> = Dynamic(nil)
 
+	// MARK: - Public Variables
+
+	var canLoadMore: Bool = true
+
     // MARK: - Property Observers
 
     var searchTerm: String = "" {
         didSet {
-            guard searchTerm != "" else { return }
-            loadSearchResults(with: searchTerm)
+			didUpdateSearchTerm()
         }
     }
 
-    var viewModels = [SearchResultViewModel]() {
+	var viewModels: [SearchResultViewModel]? = nil {
         didSet {
             needsRefresh.value = true
         }
@@ -44,7 +47,6 @@ class SearchListViewModel {
     fileprivate let interval: Double = 1.5
     fileprivate var webService: WebService!
     fileprivate var searchGroup: SearchGroup?
-    fileprivate var canLoadMore: Bool = true
 
     // MARK: - Lazy Inits
 
@@ -61,8 +63,16 @@ class SearchListViewModel {
 
     // MARK: - Helper Methods
 
-    func loadMoreResults() {
+	func didUpdateSearchTerm() {
+		guard searchTerm != "" else { return }
+		throttler.throttle { [unowned self] in
+			self.loadSearchResults(with: self.searchTerm, clearResults: true)
+		}
+	}
 
+    func loadMoreResults() {
+		guard canLoadMore else { return }
+		loadSearchResults(with: searchTerm, clearResults: false)
     }
 
 }
@@ -77,43 +87,30 @@ extension SearchListViewModel {
      - parameter query: the search term
      - parameter completion: returns a closure with error and 
      */
-    func loadSearchResults(with query: String) {
-        throttler.throttle { [weak self] in
-            guard let self_ = self else {
-                return
-            }
-            self_.webService.loadSearchResultsServer(searchTerm: query) { (error, searchGroup) in
-                guard error == nil else {
-                    self_.loadError.value = error
-                    return
-                }
-                if let searchGroup = searchGroup as? SearchGroup, let searchResults = searchGroup.searchResults {
-                    var viewModels = [SearchResultViewModel]()
-                    for searchResult in searchResults {
-                        let viewModel = SearchResultViewModel(searchResult: searchResult)
-                        viewModels.append(viewModel)
-                    }
-                    self_.viewModels = viewModels
-                    self_.searchGroup = searchGroup
-                } else {
-                    self_.canLoadMore = false // Loaded last page
-                }
-            }
-        }
-    }
-
-    /**
-     This method loads more search results with pagination
-
-     - parameter query: the search term
-     - parameter query: the current page
-     - parameter query: the amount of results for page load
-     - parameter completion: returns a closure with error and
-     */
-    func loadMoreSearchResults(with query: String, page: Int, perPage: Int, completion: (() -> Void)? = nil) {
-        webService.loadSearchResultsServer(searchTerm: query, currentPage: page, perPage: perPage) { error, searchResults in
-            
-        }
-    }
-
+	func loadSearchResults(with query: String, enableThrottling: Bool = false, clearResults: Bool = false) {
+		let currentPage = searchGroup?.page ?? 0
+		let nextPage = currentPage + 1
+		webService.loadSearchResultsServer(searchTerm: query, page: nextPage) { [weak self] error, searchGroup in
+			guard let self_ = self else { return }
+			guard error == nil else {
+				self_.loadError.value = error
+				return
+			}
+			if let searchGroup = searchGroup as? SearchGroup, let searchResults = searchGroup.searchResults {
+				var viewModels = [SearchResultViewModel]()
+				for searchResult in searchResults {
+					let viewModel = SearchResultViewModel(searchResult: searchResult)
+					viewModels.append(viewModel)
+				}
+				if clearResults {
+					self_.viewModels = viewModels
+				} else {
+					self_.viewModels?.append(contentsOf: viewModels)
+				}
+				self_.searchGroup = searchGroup
+			} else {
+				self_.canLoadMore = false // Loaded last page
+			}
+		}
+	}
 }

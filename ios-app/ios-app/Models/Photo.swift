@@ -10,11 +10,12 @@ import Foundation
 
 extension Photo: SearchResult {}
 
-class Photo {
+struct Photo {
     var id: String?
     var ownerID: String?
     var title: String?
     var thumbnailURL: URL?
+	var fullSizeURL: URL?
 
     init(with dictionary: [String: Any]) {
         if let id = dictionary["id"] as? String {
@@ -26,8 +27,8 @@ class Photo {
         if let title = dictionary["title"] as? String {
             self.title = title
         }
-        if let thumbnailURLString = dictionary["url_sq"] as? String, let thumbnailURL = URL(string: thumbnailURLString) {
+        if let thumbnailURLString = dictionary["url_m"] as? String, let thumbnailURL = URL(string: thumbnailURLString) {
             self.thumbnailURL = thumbnailURL
         }
-    }
+	}
 }

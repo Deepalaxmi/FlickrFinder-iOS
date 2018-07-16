@@ -10,10 +10,17 @@ import UIKit
 
 class SearchResultsViewController: UIViewController {
 
-    var viewModel: SearchListViewModel!
-	var collectionView: UICollectionView!
+	// MARK: - Variables
 
-    override func viewDidLoad() {
+    var viewModel: SearchListViewModel!
+
+	// MARK: - Private
+
+	private var collectionView: UICollectionView!
+
+	// MARK: - View Life Cycle
+
+	override func viewDidLoad() {
         super.viewDidLoad()
 		setupCollectionView()
 		setupConstraints()
@@ -21,10 +28,14 @@ class SearchResultsViewController: UIViewController {
 		setupBindings()
     }
 
+	deinit {
+		print("[DEBUG]: Search Results VC Deinit")
+	}
+
     // MARK: - Setup Bindings
 
     func setupBindings() {
-        viewModel.needsRefresh.bind { [unowned self] needsRefresh in
+		viewModel.needsRefresh.bind { [unowned self] needsRefresh in
             if needsRefresh {
                 self.collectionView.reloadData()
             }
@@ -37,8 +48,8 @@ class SearchResultsViewController: UIViewController {
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.scrollDirection = .vertical
 		collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-		collectionView.delegate = self as? UICollectionViewDelegate
-		collectionView.dataSource = self as? UICollectionViewDataSource
+		collectionView.delegate = self
+		collectionView.dataSource = self
 		collectionView.backgroundColor = .white
 		collectionView.contentInset.top = 8.0
 		collectionView.contentInset.left = 8.0
@@ -59,31 +70,49 @@ class SearchResultsViewController: UIViewController {
 		NSLayoutConstraint.activate(constraints)
 	}
 
+	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+		let offset = UIScreen.main.bounds.height
+		let endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height
+		if endScrolling >= scrollView.contentSize.height - offset {
+			viewModel.loadMoreResults()
+		}
+	}
+
 }
 
 // MARK: - UICollectionViewDelegate & UICollectionViewDataSource
 
 extension SearchResultsViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		guard let searchResultViewModel = viewModel.viewModels?[indexPath.row] else { return }
+		appCoordinator?.showDetailViewController(viewModel: searchResultViewModel)
+	}
+
+	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
 	}
 }
 
 extension SearchResultsViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return viewModel.viewModels.count
+		return viewModel?.viewModels?.count ?? 0
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let searchResultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultsCell", for: indexPath) as! SearchResultsCell
-		searchResultCell.viewModel = viewModel.viewModels[indexPath.row]
+		guard let childViewModel = viewModel?.viewModels?[indexPath.row] else { return searchResultCell }
+		searchResultCell.viewModel = childViewModel
 		return searchResultCell
 	}
 }
 
 extension SearchResultsViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: 120, height: 120)
+		let isLandscape = UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)
+		let cellPadding: CGFloat = 16.0
+		let cellWidth = (isLandscape ? (collectionView.frame.size.width / 5.0) : (collectionView.frame.size.width / 2.0)) - cellPadding
+		let cellHeight = cellWidth * 1.5
+		return CGSize(width: cellWidth, height: cellHeight)
 	}
 }
 

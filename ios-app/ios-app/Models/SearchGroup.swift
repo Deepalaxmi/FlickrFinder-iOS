@@ -9,6 +9,10 @@
 
 import Foundation
 
+/**
+## Search Group
+ Right now this class is a wrapper for Photos but can be used for other SearchResult types we wish to support in the future. Like Events, Groups.
+*/
 class SearchGroup {
     var searchResults: [SearchResult]?
     var page: Int?

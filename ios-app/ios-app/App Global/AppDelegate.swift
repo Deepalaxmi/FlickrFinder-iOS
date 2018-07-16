@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func configureAppearance() {
         UINavigationBar.appearance().barTintColor = .flickrBlue
-        UINavigationBar.appearance().tintColor = .flickrBlue
+        UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().prefersLargeTitles = true
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: AppFonts.AvenirHeavy20]
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: AppFonts.AvenirHeavy28]
@@ -39,4 +39,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

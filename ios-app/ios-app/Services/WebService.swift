@@ -19,6 +19,8 @@ internal func backgroundQueue(_ block: @escaping ()->()) {
     DispatchQueue.global(qos: .background).async(execute: block)
 }
 
+
+
 enum WebServiceError: Error {
     case invalidURL
     case invalidResponse
@@ -63,28 +65,26 @@ final class WebService {
 
     // MARK: - Load Methods
 
-    public func loadSearchResultsServer(searchTerm: String, extraParameters: [String: Any]? = nil, currentPage: Int = 1, perPage: Int = 25, completion: CompletionObjectHandler = nil) {
+    public func loadSearchResultsServer(searchTerm: String, page: Int = 1, perPage: Int = 25, completion: CompletionObjectHandler = nil) {
+		var queryItems: [URLQueryItem] = [
+			AuthMethod.queryItem(method: .apiKey),
+			APIMethod.queryItem(method: .search)
+		]
+
         let parameters: [String: Any] = [
             "extras": [
                 "media",
-                "url_sq"
+                "url_sq",
+				 "url_m"
             ],
             "format": "json",
             "nojsoncallback": "true",
-            "text": searchTerm,
+			"tags": searchTerm,
             "per_page": String(perPage),
-            "page": String(currentPage)
-        ]
-        var queryItems: [URLQueryItem] = [
-            AuthMethod.queryItem(method: .apiKey),
-            APIMethod.queryItem(method: .search)
+            "page": String(page)
         ]
 
-        var parameterQueries = generateParameters(dictionary: parameters)
-        if let extraParameters = extraParameters {
-            parameterQueries.append(contentsOf: generateParameters(dictionary: extraParameters))
-        }
-        queryItems.append(contentsOf: parameterQueries)
+		queryItems.append(contentsOf: generateParameters(dictionary: parameters))
 
         var urlComponents = URLComponents(string: baseURL)
         urlComponents?.queryItems = queryItems
@@ -94,16 +94,16 @@ final class WebService {
         }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = HTTPMethod.get.rawValue
-        urlRequest.executeRequest { (error, data) in
-            if let error = error {
-                completion?(error, nil)
-            } else if let dictionary = data as? [String: Any] {
-                let searchGroup = SearchGroup(with: dictionary)
-                completion?(nil, searchGroup)
-            } else {
-                completion?(WebServiceError.invalidResponse, nil)
-            }
-        }
+		urlRequest.executeRequest { (error, data) in
+			if let error = error {
+				completion?(error, nil)
+			} else if let dictionary = data as? [String: Any] {
+				let searchGroup = SearchGroup(with: dictionary)
+				completion?(nil, searchGroup)
+			} else {
+				completion?(WebServiceError.invalidResponse, nil)
+			}
+		}
     }
 
     // MARK: - Helper Methods
