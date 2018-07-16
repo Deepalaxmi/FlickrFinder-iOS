@@ -35,7 +35,7 @@ class AppCoordinator: Coordinator {
 		let homeViewController = HomeViewController()
 		homeViewController.title = NSLocalizedString("Home", comment: "Search title")
 		navigationController.pushViewController(homeViewController, animated: true)
-	}
+    }
 
 	func showDetailViewController(viewModel: SearchResultViewModel) {
 		let detailViewController = SearchDetailViewController()
