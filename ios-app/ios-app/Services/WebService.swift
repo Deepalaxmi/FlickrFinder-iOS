@@ -19,8 +19,6 @@ internal func backgroundQueue(_ block: @escaping ()->()) {
     DispatchQueue.global(qos: .background).async(execute: block)
 }
 
-
-
 enum WebServiceError: Error {
     case invalidURL
     case invalidResponse

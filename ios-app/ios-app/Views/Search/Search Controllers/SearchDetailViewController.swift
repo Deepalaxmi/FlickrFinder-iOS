@@ -10,7 +10,11 @@ import UIKit
 
 class SearchDetailViewController: UIViewController {
 
+	// MARK: - Variables
+
 	var viewModel: SearchResultViewModel?
+
+	// MARK: - Lazy Inits
 
 	lazy var coverImageView: UIImageView = {
 		let imageView = UIImageView(frame: .zero)
@@ -19,12 +23,16 @@ class SearchDetailViewController: UIViewController {
 		return imageView
 	}()
 
+	// MARK: - View Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 		view.backgroundColor = .white
 		setupConstraints()
 		updateContent()
     }
+
+	// MARK: - Setup Views
 
 	func setupConstraints() {
 		view.addSubview(coverImageView)

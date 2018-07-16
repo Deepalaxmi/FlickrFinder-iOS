@@ -35,11 +35,14 @@ class SearchResultsViewController: UIViewController {
     // MARK: - Setup Bindings
 
     func setupBindings() {
-		viewModel.needsRefresh.bind { [unowned self] needsRefresh in
+		viewModel.needsRefresh.bind { [weak self] needsRefresh in
             if needsRefresh {
-                self.collectionView.reloadData()
+                self?.collectionView.reloadData()
             }
         }
+		viewModel.loadError.bind { [weak self] error in
+			self?.presentAlertForError(with: error)
+		}
     }
 
 	// MARK: - Setup Views
