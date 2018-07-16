@@ -28,10 +28,6 @@ class SearchResultsViewController: UIViewController {
 		setupBindings()
     }
 
-	deinit {
-		print("[DEBUG]: Search Results VC Deinit")
-	}
-
     // MARK: - Setup Bindings
 
     func setupBindings() {
