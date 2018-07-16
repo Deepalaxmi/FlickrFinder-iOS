@@ -11,76 +11,76 @@ import UIKit
 class SearchListViewModel {
     
     // MARK: - Static Variables
-
+    
     static var imageCache = NSCache<NSString, AnyObject>()
-
+    
     // MARK: - Dynamic Variables
-
+    
     var needsRefresh: Dynamic<Bool> = Dynamic(false) {
         didSet {
             needsRefresh.value = false // Reset Flag
         }
     }
-
+    
     var loadError: Dynamic<Error?> = Dynamic(nil)
-
+    
     // MARK: - Public Variables
-
+    
     var canLoadMore: Bool = true
-
+    
     // MARK: - Property Observers
-
+    
     var searchTerm: String = "" {
         didSet {
             didUpdateSearchTerm()
         }
     }
-
+    
     var viewModels: [SearchResultViewModel]? = nil {
         didSet {
             needsRefresh.value = true
         }
     }
-
+    
     // MARK: - Fileprivate
-
+    
     fileprivate let interval: Double = 1.5
     fileprivate var webService: WebService!
     fileprivate var searchGroup: SearchGroup?
-
+    
     // MARK: - Lazy Inits
-
+    
     fileprivate lazy var throttler: Throttler = {
         let requestThrottler = Throttler(seconds: interval)
         return requestThrottler
     }()
-
+    
     // MARK: - Life Cycle
-
+    
     init(webService: WebService) {
         self.webService = webService
     }
-
+    
     // MARK: - Helper Methods
-
+    
     func didUpdateSearchTerm() {
         guard searchTerm != "" else { return }
         throttler.throttle { [unowned self] in
             self.loadSearchResults(with: self.searchTerm, clearResults: true)
         }
     }
-
+    
     func loadMoreResults() {
         guard canLoadMore else { return }
         loadSearchResults(with: searchTerm, clearResults: false)
     }
-
+    
 }
 
 extension SearchListViewModel {
-
+    
     // MARK: - Networking
-
+    
     /**
      This method loads the search results and populate the child view models. The requests are throttled to prevent excess requests.
      

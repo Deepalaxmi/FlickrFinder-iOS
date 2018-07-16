@@ -9,17 +9,17 @@
 import UIKit
 
 struct SearchResultViewModel {
-
+    
     // MARK: - Variables
-
+    
     var title: String?
     var imageURL: URL?
-
+    
     // MARK: - Life Cycle
-
+    
     init(searchResult: SearchResult) {
         self.title = searchResult.title
         self.imageURL = searchResult.thumbnailURL
     }
-
+    
 }

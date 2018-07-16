@@ -15,8 +15,8 @@ struct Photo {
     var ownerID: String?
     var title: String?
     var thumbnailURL: URL?
-	var fullSizeURL: URL?
-
+    var fullSizeURL: URL?
+    
     init(with dictionary: [String: Any]) {
         if let id = dictionary["id"] as? String {
             self.id = id
@@ -30,5 +30,5 @@ struct Photo {
         if let thumbnailURLString = dictionary["url_m"] as? String, let thumbnailURL = URL(string: thumbnailURLString) {
             self.thumbnailURL = thumbnailURL
         }
-	}
+    }
 }

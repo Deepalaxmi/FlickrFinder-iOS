@@ -10,14 +10,14 @@
 import Foundation
 
 /**
-## Search Group
+ ## Search Group
  Right now this class is a wrapper for Photos but can be used for other SearchResult types we wish to support in the future. Like Events, Groups.
-*/
+ */
 class SearchGroup {
     var searchResults: [SearchResult]?
     var page: Int?
     var perPage: Int?
-
+    
     init(with dictionary: [String: Any]) {
         if let photosDictionary = dictionary["photos"] as? [String: Any], let photosDictionaryArray = photosDictionary["photo"] as? [[String: Any]] {
             if let page = photosDictionary["page"] as? Int {
