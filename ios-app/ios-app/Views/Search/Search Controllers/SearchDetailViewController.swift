@@ -10,7 +10,7 @@ import UIKit
 
 class SearchDetailViewController: UIViewController {
 
-	// MARK: - Variables
+    // MARK: - Variables
 
 	var viewModel: SearchResultViewModel?
 
