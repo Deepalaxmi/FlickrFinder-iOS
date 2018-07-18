@@ -9,87 +9,82 @@
 import UIKit
 
 class SearchResultsViewController: UIViewController {
-
-	// MARK: - Variables
+	
+    // MARK: - Variables
 
     var viewModel: SearchListViewModel!
 
-	// MARK: - Private
+    // MARK: - Private
 
-	private var collectionView: UICollectionView!
+    private var collectionView: UICollectionView!
 
-	// MARK: - View Life Cycle
+    // MARK: - View Life Cycle
 
-	override func viewDidLoad() {
-        super.viewDidLoad()
-		setupCollectionView()
-		setupConstraints()
-		registerSearchCells()
-		setupBindings()
+    override func viewDidLoad() {
+    	super.viewDidLoad()
+	setupCollectionView()
+	setupConstraints()
+	registerSearchCells()
+	setupBindings()
     }
 
     // MARK: - Setup Bindings
 
     func setupBindings() {
-		viewModel.needsRefresh.bind { [weak self] needsRefresh in
+        viewModel.needsRefresh.bind { [weak self] needsRefresh in
             if needsRefresh {
                 self?.collectionView.reloadData()
             }
         }
-		viewModel.loadError.bind { [weak self] error in
-			self?.presentAlertForError(with: error)
-		}
+        viewModel.loadError.bind { [weak self] error in
+	    self?.presentAlertForError(with: error)
+        }
     }
 
-	// MARK: - Setup Views
+    // MARK: - Setup Views
 
-	func setupCollectionView() {
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.scrollDirection = .vertical
-		collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-		collectionView.delegate = self
-		collectionView.dataSource = self
-		collectionView.backgroundColor = .white
-		collectionView.contentInset.top = 8.0
-		collectionView.contentInset.left = 8.0
-		collectionView.contentInset.right = 8.0
-		collectionView.translatesAutoresizingMaskIntoConstraints = false
-		view.addSubview(collectionView)
-	}
+    func setupCollectionView() {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = .white
+        collectionView.contentInset.top = 8.0
+        collectionView.contentInset.left = 8.0
+        collectionView.contentInset.right = 8.0
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(collectionView)
+    }
 
-	func registerSearchCells() {
-		collectionView.register(SearchResultsCell.self, forCellWithReuseIdentifier: "SearchResultsCell")
-		collectionView.register(UINib(nibName: "SearchResultsCell", bundle: nil), forCellWithReuseIdentifier: "SearchResultsCell")
-	}
+    func registerSearchCells() {
+	collectionView.register(SearchResultsCell.self, forCellWithReuseIdentifier: "SearchResultsCell")
+	collectionView.register(UINib(nibName: "SearchResultsCell", bundle: nil), forCellWithReuseIdentifier: "SearchResultsCell")
+    }
 
-	func setupConstraints() {
-		var constraints: [NSLayoutConstraint] = []
-		constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|[collectionView]|", options: [], metrics: nil, views: ["collectionView": collectionView]))
-		constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[collectionView]|", options: [], metrics: nil, views: ["collectionView": collectionView]))
-		NSLayoutConstraint.activate(constraints)
-	}
+    func setupConstraints() {
+        var constraints: [NSLayoutConstraint] = []
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|[collectionView]|", options: [], metrics: nil, views: ["collectionView": collectionView]))
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[collectionView]|", options: [], metrics: nil, views: ["collectionView": collectionView]))
+        NSLayoutConstraint.activate(constraints)
+    }
 
-	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-		let offset = UIScreen.main.bounds.height
-		let endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height
-		if endScrolling >= scrollView.contentSize.height - offset {
-			viewModel.loadMoreResults()
-		}
-	}
-
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let offset = UIScreen.main.bounds.height
+	    let endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height
+	    if endScrolling >= scrollView.contentSize.height - offset {
+	        viewModel.loadMoreResults()
+    	}
+    }
 }
 
 // MARK: - UICollectionViewDelegate & UICollectionViewDataSource
 
 extension SearchResultsViewController: UICollectionViewDelegate {
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		guard let searchResultViewModel = viewModel.viewModels?[indexPath.row] else { return }
-		appCoordinator?.showDetailViewController(viewModel: searchResultViewModel)
-	}
-
-	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-
-	}
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let searchResultViewModel = viewModel.viewModels?[indexPath.row] else { return }
+        appCoordinator?.showDetailViewController(viewModel: searchResultViewModel)
+    }
 }
 
 extension SearchResultsViewController: UICollectionViewDataSource {
