@@ -88,26 +88,26 @@ extension SearchResultsViewController: UICollectionViewDelegate {
 }
 
 extension SearchResultsViewController: UICollectionViewDataSource {
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return viewModel?.viewModels?.count ?? 0
-	}
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel?.viewModels?.count ?? 0
+    }
 
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let searchResultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultsCell", for: indexPath) as! SearchResultsCell
-		guard let childViewModel = viewModel?.viewModels?[indexPath.row] else { return searchResultCell }
-		searchResultCell.viewModel = childViewModel
-		return searchResultCell
-	}
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let searchResultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultsCell", for: indexPath) as! SearchResultsCell
+        guard let childViewModel = viewModel?.viewModels?[indexPath.row] else { return searchResultCell }
+        searchResultCell.viewModel = childViewModel
+        return searchResultCell
+    }
 }
 
 extension SearchResultsViewController: UICollectionViewDelegateFlowLayout {
-	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let isLandscape = UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)
-		let cellPadding: CGFloat = 16.0
-		let cellWidth = (isLandscape ? (collectionView.frame.size.width / 5.0) : (collectionView.frame.size.width / 2.0)) - cellPadding
-		let cellHeight = cellWidth * 1.5
-		return CGSize(width: cellWidth, height: cellHeight)
-	}
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let isLandscape = UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)
+        let cellPadding: CGFloat = 16.0
+        let cellWidth = (isLandscape ? (collectionView.frame.size.width / 5.0) : (collectionView.frame.size.width / 2.0)) - cellPadding
+        let cellHeight = cellWidth * 1.5
+        return CGSize(width: cellWidth, height: cellHeight)
+    }
 }
 
 
